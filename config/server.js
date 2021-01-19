@@ -38,6 +38,7 @@ class Server {
         //EndPoints
         //myApp = io.listen(this.io);
         this.app.use('/api/auth/',require('../routes/auth'));
+        this.app.use('/api/mensajes/',require('../routes/mensajes'));
     }
 
     // Esta configuración se puede tener aquí o como propieda de clase
