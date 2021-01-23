@@ -1,3 +1,5 @@
+const { usuarioConectadoDesconectado } = require("../controllers/sockets");
+const { comprobarJWT } = require("../helpers/jwt");
 const Marcadores = require("./marcadores");
 
 class Sockets {
@@ -11,22 +13,33 @@ class Sockets {
 
   socketEvents() {
     // On connection
-    this.io.on("connection", (socket) => {
+    this.io.on("connection", async(socket) => {
       console.log("cliente conectado");
-      socket.emit("marcadores-activos", this.marcadores.activos);
+      ;
+      const [valido,uid] = comprobarJWT(socket.handshake.query['x-token']);
+      if(!valido){
+        console.log('socket no identificado');
+        return socket.disconnect();
+      }
+      const usuario = await usuarioConectadoDesconectado(uid,true);
+      console.log('se conectó',usuario.nombre);
+      //Validar JWT
+      //Si el token no es válido desconectar
 
-      socket.on("marcador-nuevo", (marcador) => {
-        // { id, lng, lat }
-        console.log(marcador);
-        this.marcadores.agregarMarcador(marcador);
-        socket.emit("agrego-usuario", {data:'Hola mundo'});
-        socket.broadcast.emit("marcador-nuevo", marcador);
-      });
+      //Saber que usuario está activo mediante el UID
 
-      socket.on("marcador-actualizado", (marcador) => {
-        this.marcadores.actualizarMarcador(marcador);
-        socket.broadcast.emit("marcador-actualizado", marcador);
-      });
+      //Emitir todos los usuarios conectados
+
+      //Unirme a una sala Socket join uid
+
+      //Escuchar cuando el cliente manda mensaje mensaje-personal
+
+      // Disconnect (marcar en base de datos que usuario se desconectó)
+      socket.on('disconnect',async() => {
+        await usuarioConectadoDesconectado(uid,false);
+        console.log('cliente desconectado');
+      })
+      
       
     });
   }

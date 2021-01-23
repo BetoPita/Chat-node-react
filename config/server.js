@@ -44,9 +44,9 @@ class Server {
     // Esta configuración se puede tener aquí o como propieda de clase
     // depende mucho de lo que necesites
     configurarSockets() {
-        //new Sockets( this.io );
+        new Sockets( this.io );
         
-      io.listen(this.io); 
+      //io.listen(this.io); 
     }
 
     execute() {

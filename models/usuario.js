@@ -20,11 +20,12 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 1,
             type: DataTypes.STRING
         },
-        // online: {
-        //     allowNull: true,
-        //     defaultValue: 1,
-        //     type: DataTypes.
-        // }
+        online: {
+            allowNull: true,
+            defaultValue: false,
+            type: DataTypes.BOOLEAN,
+
+        },
     }, {
         timestamps: true,
         defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
