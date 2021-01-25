@@ -8,6 +8,7 @@ const io = require("./io");
 const Sockets = require("./sockets");
 const cors = require("cors");
 var myApp = "";
+const whitelist = ["http://localhost:3000", "https://chat-app-front-react.herokuapp.com/"];
 const corsOptions = {
   credentials: true, // This is important.
   origin: (origin, callback) => {
