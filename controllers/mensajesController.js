@@ -1,5 +1,5 @@
 const Mensajes = require("../models/index").Mensajes;
-const {Sequelize} = require('Sequelize');
+const {Sequelize} = require('sequelize');
 const {or} = Sequelize.Op;
 const obtenerChat = async (req, res) => {
   const miId = req.uid;
