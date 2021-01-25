@@ -11,7 +11,7 @@ const obtenerChat = async (req, res) => {
       ],
     },
     order:[
-        ['createdAt','DESC']
+        ['createdAt','asc']
     ],
     limit : 30,
     //attributes: ['id', 'logo_version', 'logo_content_type', 'name', 'updated_at']
@@ -21,7 +21,7 @@ const obtenerChat = async (req, res) => {
     ok: true,
     miId,
     mensajesDe,
-    mensajes: "Hola",
+    mensajes: mensajesDB,
   });
 };
 module.exports = {
